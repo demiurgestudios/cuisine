@@ -7,8 +7,10 @@ except ImportError:
     from distutils.core import setup
 
 with open("src/cuisine.py", "r") as f:
-    VERSION = eval(filter(lambda _:_.startswith("VERSION"),
-        f.readlines())[0].split("=")[1])
+    VERSION = eval([
+        line for line in f.readlines()
+        if line.startswith("VERSION")
+    ][0].split("=")[1])
 
 setup(
     name             = "cuisine",
