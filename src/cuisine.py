@@ -129,8 +129,10 @@ class Stats(object):
 
 def stringify( value ):
 	"""Turns the given value in a user-friendly string that can be displayed"""
-	if   type(value) in (str, unicode, bytes) and len(value) > STRINGIFY_MAXSTRING:
+	if isinstance(value, str) and len(value) > STRINGIFY_MAXSTRING:
 		return "{0}...".format(value[0:STRINGIFY_MAXSTRING])
+	elif isinstance(value, bytes) and len(value) > STRINGIFY_MAXSTRING:
+		return "{0}...".format(repr(value)[0:STRINGIFY_MAXSTRING])
 	elif type(value) in (list, tuple) and len(value) > 10:
 		return"[{0},...]".format(", ".join([stringify(_) for _ in value[0:STRINGIFY_MAXLISTSTRING]]))
 	else:
@@ -908,7 +910,7 @@ def process_find(name, exact=False):
 	"""Returns the pids of processes with the given name. If exact is `False`
 	it will return the list of all processes that start with the given
 	`name`."""
-	is_string = isinstance(name,str) or isinstance(name,unicode)
+	is_string = isinstance(name, str)
 	# NOTE: ps -A seems to be the only way to not have the grep appearing
 	# as well
 	if is_string: processes = run("ps -A | grep {0} ; true".format(name))
