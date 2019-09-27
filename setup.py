@@ -21,7 +21,7 @@ setup(
     url              = "http://github.com/sebastien/cuisine",
     download_url     = "https://github.com/sebastien/cuisine/tarball/%s" % (VERSION),
     keywords         = ["fabric", "chef", "ssh",],
-    install_requires = ["fabric",],
+    install_requires = [],
     package_dir      = {"":"src"},
     py_modules       = ["cuisine"],
     license          = "License :: OSI Approved :: BSD License",
